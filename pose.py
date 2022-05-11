@@ -1,4 +1,3 @@
-from ctypes.wintypes import HHOOK
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -26,6 +25,22 @@ count = 0
 last_toggle_state=0
 current_toggle_state=0
 
+class Object:
+    def __init__(self, size=200):
+        self.imgRead = cv2.imread('./image/mm.png')
+        self.size = size
+        self.img = cv2.resize(self.imgRead, (size, size))
+        img2gray = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
+        _, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)
+        self.mask = mask
+        self.x = 0
+        self.y = 0
+
+    def insert_object(self, frame):
+        roi = frame[self.y:self.y + self.size, self.x:self.x + self.size]
+        roi[np.where(self.mask)] = 0
+        roi += self.img
+
 def calc_count(angle):
 
 
@@ -48,7 +63,7 @@ def calc_count(angle):
 
 
     # print(toggle)
-    print(count)
+    # print(count)
 
 def counting():
 
@@ -87,6 +102,8 @@ def cal_angle(a,b,c):
 
 # def main_def():
 
+obj = Object()
+
 while True:
     ret, frame = cap.read()
     #black_sc = np.zeros((640,480,3),dtype=np.uint8)
@@ -124,11 +141,13 @@ while True:
     # except BaseException as err:
     #     print(f"Unexpected {err=}, {type(err)=}")
     #     raise
-
+    
     cv2.namedWindow('black', cv2.WINDOW_NORMAL)
+
+    obj.insert_object(frame1)
     #cv2.setWindowProperty('black', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     #cv2.imshow("black", black_sc)
-    cv2.putText(frame1, "sex", (30, 25), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
+    cv2.putText(frame1, str(count), (30, 25), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
     cv2.imshow("black", frame1)
 
     #cv2.setWindowProperty('black', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
@@ -144,3 +163,4 @@ while True:
 #     main_p = Process(target=main_def)
 
 #     main_p.start()
+
