@@ -2,9 +2,11 @@ import cv2
 import numpy as np
 import keyboard
 
+videos = "image/1.mp4"
+
 class Object:
     def __init__(self, size=200):
-        self.imgRead = cv2.imread('img\mm.png')
+        self.imgRead = cv2.imread('image/mm.png')
         self.size = size
         self.img = cv2.resize(self.imgRead, (size, size))
         img2gray = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
@@ -29,17 +31,23 @@ def action1():
     cv2.setWindowProperty("window2", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     cv2.destroyWindow("window")
     while True:
-        ret, frame = cap.read()
+        video_cap = cv2.VideoCapture(videos)
+        global check_window2
+        ret, frame = video_cap.read()
         frame = cv2.flip(frame, 1)
-        cv2.imshow("window2",frame)
-
-        if keyboard.is_pressed("o") & cv2.waitKey(1):
-            check_window2 = True
+        try:
+            cv2.imshow("window2",frame)
+        except:
+            print("dd")
             break
+
+        # if cv2.waitKey(1) & 0xFF == ord('o'):
+        #     check_window2 = True
+        #     break
 
 while True:
     cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
-    cv2.setWindowProperty("window", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    # cv2.setWindowProperty("window", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     if check_window2 == True:
         cv2.destroyWindow("window2")
@@ -52,7 +60,7 @@ while True:
 
     cv2.imshow("window", frame)
 
-    if keyboard.is_pressed("p"):
+    if cv2.waitKey(1) & 0xFF == ord('p'):
         action1()
         
     if cv2.waitKey(1) & 0xFF == ord('q'):
