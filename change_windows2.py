@@ -33,7 +33,6 @@ def action1():
         try:
             cv2.imshow("window2", frame2)
         except:
-            print("error")
             break
         if cv2.waitKey(1) & 0xFF == ord('o'):
             break
