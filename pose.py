@@ -54,6 +54,7 @@ class Object:
 def action1():
     cv2.destroyAllWindows()
     cv2.namedWindow("window2", cv2.WINDOW_NORMAL)
+    cv2.setWindowProperty('window2', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     video_cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
     while True:
         # global check_window2
@@ -70,13 +71,13 @@ def action1():
 
 def selectExercise():
     global exercise_no
-    cv2.destroyAllWindows()
     cv2.namedWindow("image", cv2.WINDOW_NORMAL)
     cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     video_cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
     img = cv2.imread('image/select/select.001.jpeg', cv2.IMREAD_COLOR)
     while True:
         cv2.imshow('image', img)
+        cv2.destroyWindow("main")
         if cv2.waitKey(1) & 0xFF == ord('1'):
             exercise_no=1
             action1()
@@ -218,9 +219,9 @@ def exercise2():
     #cv2.setWindowProperty('black', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 while True:
     img = cv2.imread('image/ready/ready.001.jpeg', cv2.IMREAD_COLOR)
-    cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-    cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-    cv2.imshow('image', img)
+    cv2.namedWindow('main', cv2.WINDOW_NORMAL)
+    cv2.setWindowProperty('main', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    cv2.imshow('main', img)
 
 
     key = cv2.waitKey(1) & 0xFF
