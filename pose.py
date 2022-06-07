@@ -72,6 +72,7 @@ def selectExercise():
     global exercise_no
     cv2.destroyAllWindows()
     cv2.namedWindow("image", cv2.WINDOW_NORMAL)
+    cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     video_cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
     img = cv2.imread('image/select/select.001.jpeg', cv2.IMREAD_COLOR)
     while True:
@@ -178,6 +179,7 @@ def exercise1():
             pass
 
         cv2.namedWindow('window', cv2.WINDOW_NORMAL)
+        cv2.setWindowProperty('window', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
             
 
