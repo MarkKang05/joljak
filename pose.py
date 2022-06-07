@@ -40,8 +40,10 @@ class Object:
         img2gray = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
         _, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)
         self.mask = mask
-        self.x = int(640/2-size/2) # 320-100
-        self.y = int(480/2-size/2) # 240-100
+        # self.x = int(640/2-size/2) # 320-100
+        # self.y = int(480/2-size/2) # 240-100
+        self.x = 340
+        self.y = 0
 
     def insert_object(self, frame):
         if is_show:
