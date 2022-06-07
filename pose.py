@@ -80,17 +80,17 @@ def selectExercise():
             exercise_no=1
             action1()
             exercise1()
-            print("1번 운동 선택")
+            print("select exercise 1")
             break
         if cv2.waitKey(1) & 0xFF == ord('2'):
             cv2.destroyWindow("windows2")
             exercise_no=2
-            print("2번 운동 선택")
+            print("select exercise 2")
             break
         if cv2.waitKey(1) & 0xFF == ord('3'):
             cv2.destroyWindow("windows2")
             exercise_no=3
-            print("3번 운동 선택")
+            print("select exercise 3")
             break
         if cv2.waitKey(1) & 0xFF == ord('o'):
             cv2.destroyWindow("windows2")
