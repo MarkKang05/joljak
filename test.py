@@ -1,13 +1,9 @@
-import keyboard
+import cv2
 
-while True:
-    if keyboard.read_key() == "p":
-        print("You pressed p")
-        break
+capture = cv2.VideoCapture(0)
 
-while True:
-    if keyboard.is_pressed("q"):
-        print("bYou pressed q")
-        break
-        
-keyboard.on_press_key("r", lambda _:print("You pressed r"))
+while cv2.waitKey(33)<0:
+    ret, frame = capture.read()
+    cv2.imshow("VideoFrame", frame)
+capture.release()
+cv2.destroyAllWindows()
