@@ -40,7 +40,7 @@ is_show = False
 
 class Object:
     def __init__(self, size=300):
-        self.imgRead = cv2.imread('image/img/{}.jpg'.format(count*10))
+        self.imgRead = cv2.imread('image/img3/{}.png'.format(count*10))
         self.size = size
         self.img = cv2.resize(self.imgRead, (size, size))
         img2gray = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
