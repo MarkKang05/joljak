@@ -4,6 +4,12 @@ import mediapipe as mp
 import numpy as np
 from multiprocessing import Process
 import time
+import pygame
+pygame.mixer.init()
+test_sound = pygame.mixer.Sound("/home/pi/joljak/1.wav")
+test_sound.set_volume(1.0)
+test_sound.play()
+
   
 videos = "image/1.mp4"
 
