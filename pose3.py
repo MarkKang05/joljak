@@ -85,7 +85,7 @@ def action2():
     video_cap2.set(cv2.CAP_PROP_POS_FRAMES, 0)
     while True:
         # global check_window2
-        ret, frame = video_cap.read()
+        ret, frame = video_cap2.read()
         frame = cv2.flip(frame, 1)
         try:
             cv2.imshow("window2",frame) 
