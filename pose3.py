@@ -6,9 +6,9 @@ from multiprocessing import Process
 import time
 import pygame
 pygame.mixer.init()
-test_sound = pygame.mixer.Sound("/home/pi/joljak/1.wav")
-test_sound.set_volume(1.0)
-test_sound.play()
+#ts = pygame.mixer.Sound("/home/pi/joljak/1.wav")
+#ts.set_volume(1.0)
+#ts.play()
 
   
 videos = "image/1.mp4"
@@ -103,21 +103,19 @@ def selectExercise():
     cv2.destroyWindow("main")
     while True:
         cv2.imshow('image', img)
+        key = cv2.waitKey(1) & 0xFF
         
-        if cv2.waitKey(1) & 0xFF == ord('2'):
-            #cv2.destroyWindow("windows2")
+        if key == ord('2'):
             action2()
             exercise2()
+            finish()
             print("select exercise 2")
             break
-        if cv2.waitKey(1) & 0xFF == ord('1'):
-            #cv2.destroyWindow("windows2")
+        if key == ord('1'):
             action1()
             exercise1()
+            finish()
             print("select exercise 2")
-            break
-        if cv2.waitKey(1) & 0xFF == ord('o'):
-            #cv2.destroyWindow("windows2")
             break
         #obj2.insert_object(black_sc)
 
@@ -159,10 +157,28 @@ def cal_angle(a,b,c):
 
 def relax():
     relax_start = time.time()
-    while (time.time() - relax_start)<10:
-        black = np.zeros((480,640,3),dtype=np.uint8)
-        cv2.putText(black, "relax", (30, 25), cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
-        cv2.imshow("window", black);
+    while True:
+        if (time.time() - relax_start)>5:
+            cv2.destroyWindow("window")
+            break
+
+        cv2.namedWindow("window", cv2.WINDOW_NORMAL)
+        cv2.setWindowProperty('window', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+        img = cv2.imread('image/relax.png', cv2.IMREAD_COLOR)
+        cv2.imshow('window', img)
+        cv2.waitKey(1)
+
+def finish():
+    relax_start = time.time()
+    while True:
+        if (time.time() - relax_start)>7:
+            cv2.destroyWindow("window")
+            break
+
+        cv2.namedWindow("window", cv2.WINDOW_NORMAL)
+        cv2.setWindowProperty('window', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+        img = cv2.imread('image/relax.png', cv2.IMREAD_COLOR)
+        cv2.imshow('window', img)
         cv2.waitKey(1)
 
 
@@ -292,7 +308,7 @@ def exercise2():
         if cv2.waitKey(1) & 0xFF == ord('k'):
             cv2.destroyWindow("window")
             break
-        if(count==10 and set_count==2):
+        if(count==10 and set_count==1):
             set_count=0
             count=0
             break
@@ -303,8 +319,14 @@ def exercise2():
             relax()
 
     #cv2.setWindowProperty('black', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+mt = False
 while True:
-    img = cv2.imread('image/ready/sss.png', cv2.IMREAD_COLOR)
+    if mt==False:
+        ts = pygame.mixer.Sound("/home/pi/joljak/1.wav")
+        ts.set_volume(1.0)
+        ts.play()
+        mt=True
+    img = cv2.imread('image/start.png', cv2.IMREAD_COLOR)
     cv2.namedWindow('main', cv2.WINDOW_NORMAL)
     cv2.setWindowProperty('main', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     cv2.imshow('main', img)
@@ -316,7 +338,9 @@ while True:
         action1()
 
     if key == ord('s'):
+        ts.stop()
         selectExercise();
+        mt=False
         # exercise1(kdlsklk
 
     if key == ord("q"):
