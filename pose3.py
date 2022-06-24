@@ -11,8 +11,8 @@ pygame.mixer.init()
 #ts.play()
 
   
-videos = "image/1.mp4"
-videos2 = "image/2.mp4"
+videos = "image/exer1.mp4"
+videos2 = "image/exer2.mp4"
 
 
 mp_pose = mp.solutions.pose
@@ -179,7 +179,7 @@ def finish():
 
         cv2.namedWindow("window", cv2.WINDOW_NORMAL)
         cv2.setWindowProperty('window', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-        img = cv2.imread('image/relax.png', cv2.IMREAD_COLOR)
+        img = cv2.imread('image/finish.png', cv2.IMREAD_COLOR)
         cv2.imshow('window', img)
         cv2.waitKey(1)
 
