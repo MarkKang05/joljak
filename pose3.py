@@ -321,12 +321,19 @@ def exercise2():
             relax()
 
     #cv2.setWindowProperty('black', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
+def playSound(name):
+    ts = pygame.mixer.Sound("./sound/"+name+".wav")
+    ts.set_volume(1.0)
+    ts.play()
+
 mt = False
 while True:
     if mt==False:
-        ts = pygame.mixer.Sound("/home/pi/joljak/1.wav")
-        ts.set_volume(1.0)
-        ts.play()
+        playSound("1")
+        # ts = pygame.mixer.Sound("/home/pi/joljak/1.wav")
+        # ts.set_volume(1.0)
+        # ts.play()
         mt=True
     img = cv2.imread('image/start.png', cv2.IMREAD_COLOR)
     cv2.namedWindow('main', cv2.WINDOW_NORMAL)
