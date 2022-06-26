@@ -161,7 +161,7 @@ def cal_angle(a,b,c):
     return angle
 
 def relax():
-    playSound("relax")
+    playSound("good")
     relax_start = time.time()
     while True:
         if (time.time() - relax_start)>5:
