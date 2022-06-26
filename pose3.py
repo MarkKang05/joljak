@@ -347,7 +347,6 @@ while True:
         action1()
 
     if key == ord('s'):
-        ts.stop()
         selectExercise();
         mt=False
         # exercise1(kdlsklk
