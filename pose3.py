@@ -97,6 +97,7 @@ def action2():
             break
 
 def selectExercise():
+    playSound("select")
     global exercise_no
     cv2.namedWindow("image", cv2.WINDOW_NORMAL)
     cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
@@ -108,12 +109,14 @@ def selectExercise():
         key = cv2.waitKey(1) & 0xFF
         
         if key == ord('2'):
+            playSound("tutorial")
             action2()
             exercise2()
             finish()
             print("select exercise 2")
             break
         if key == ord('1'):
+            playSound("tutorial")
             action1()
             exercise1()
             finish()
@@ -158,6 +161,7 @@ def cal_angle(a,b,c):
     return angle
 
 def relax():
+    playSound("relax")
     relax_start = time.time()
     while True:
         if (time.time() - relax_start)>5:
@@ -171,6 +175,7 @@ def relax():
         cv2.waitKey(1)
 
 def finish():
+    playSound("finish")
     relax_start = time.time()
     while True:
         if (time.time() - relax_start)>7:
@@ -330,7 +335,7 @@ def playSound(name):
 mt = False
 while True:
     if mt==False:
-        playSound("1")
+        playSound("start")
         # ts = pygame.mixer.Sound("/home/pi/joljak/1.wav")
         # ts.set_volume(1.0)
         # ts.play()
