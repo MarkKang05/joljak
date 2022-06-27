@@ -6,14 +6,9 @@ from multiprocessing import Process
 import time
 import pygame
 pygame.mixer.init()
-#ts = pygame.mixer.Sound("/home/pi/joljak/1.wav")
-#ts.set_volume(1.0)
-#ts.play()
-
   
 videos = "image/exer1.mp4"
 videos2 = "image/exer2.mp4"
-
 
 mp_pose = mp.solutions.pose
 mpDraw = mp.solutions.drawing_utils
@@ -48,8 +43,6 @@ class Object:
         img2gray = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
         _, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)
         self.mask = mask
-        # self.x = int(640/2-size/2) # 320-100
-        # self.y = int(480/2-size/2) # 240-100
         self.x = 340
         self.y = 0
 
@@ -78,6 +71,7 @@ def action1():
         if cv2.waitKey(1) & 0xFF == ord('o'):
             cv2.destroyWindow("windows2")
             break
+
 def action2():
     cv2.destroyAllWindows()
     cv2.namedWindow("window2", cv2.WINDOW_NORMAL)
@@ -126,7 +120,6 @@ def selectExercise():
 
     
 
-
 def calc_count(angle):
     global current_state
     global last_state
@@ -140,6 +133,7 @@ def calc_count(angle):
 
     if (last_state == 0 and current_state == 1):
         count+=1
+        playSound(str(count))
         start_time = time.time()
         if(toggle==0):
             toggle=1
@@ -262,15 +256,9 @@ def exercise2():
     global cap
     global is_show
     global set_count
-    # cv2.destroyAllWindows()
     while True:
         ret, frame = cap.read()
         black_sc = np.zeros((480,640,3),dtype=np.uint8)
-
-        #black_sc = np.zeros((640,480,3),dtype=np.uint8)
-        #flipped = cv2.flip(frame, flipCode=-1)
-        #frame1 = cv2.resize(flipped, (640, 480))
-        # flipped = cv2.flip(frame, flipCode=-1)
 
         frame1 = cv2.resize(frame, (640, 480))
         rgb_img = cv2.cvtColor(frame1, cv2.COLOR_BGR2RGB)
@@ -294,8 +282,6 @@ def exercise2():
 
         cv2.namedWindow('window', cv2.WINDOW_NORMAL)
         cv2.setWindowProperty('window', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-
-            
 
         obj = Object()
 
@@ -325,7 +311,6 @@ def exercise2():
             count=0
             relax()
 
-    #cv2.setWindowProperty('black', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 def playSound(name):
     ts = pygame.mixer.Sound("./sound/"+name+".wav")
@@ -352,7 +337,7 @@ while True:
         action1()
 
     if key == ord('s'):
-        selectExercise();
+        selectExercise()
         mt=False
         # exercise1(kdlsklk
 
