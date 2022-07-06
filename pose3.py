@@ -137,7 +137,7 @@ def calc_count(angle):
 
     if (last_state == 0 and current_state == 1):
         count+=1
-        playSound(str(count))
+        playSound_num(str(count))
         start_time = time.time()
         if(toggle==0):
             toggle=1
@@ -329,6 +329,11 @@ def exercise2():
 def playSound(name):
     ts = pygame.mixer.Sound("./sound/"+name+".wav")
     ts.set_volume(1.0)
+    ts.play()
+
+def playSound_num(name):
+    ts = pygame.mixer.Sound("./sound/"+name+".wav")
+    ts.set_volume(0.6)
     ts.play()
 
 mt = False
